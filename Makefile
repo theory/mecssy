@@ -15,8 +15,10 @@ $(BUILD_DIR):
 $(TEST_BUILD_DIR):
 	mkdir -p $(TEST_BUILD_DIR)
 
+all: $(BUILD_DIR)
+
 lecsster: src/main.o src/parse.o src/scan.o
-	$(CC)) $(CFLAGS) -o build/lecsster src/main.o src/parse.o src/scan.o
+	$(CC)) $(CFLAGS) -o $(BUILD_DIR)/lecsster src/main.o src/parse.o src/scan.o
 
 src/main.o: src/main.c src/parse.h src/scan.h
 
@@ -34,11 +36,13 @@ src/scan.h: src/scan.l
 # http://stackoverflow.com/a/5395195/79202
 %.c: %.y
 
-build/lemon: lemon/lemon.c
-	$(CC)) $(CFLAGS) -o build/lemon lemon/lemon.c
+lemon: $(BUILD_DIR) $(BUILD_DIR)/lemon
+
+$(BUILD_DIR)/lemon: lemon/lemon.c
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lemon lemon/lemon.c
 
 clean:
-	rm -rf build
+	rm -rf $(BUILD_DIR)
 
 prove: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
@@ -48,7 +52,4 @@ $(TEST_BUILD_DIR)/%: $(TEST_SOURCES)
 
 vendor/libtap/src/tap.o: vendor/libtap/src/tap.h
 
-builddir:
-	mkdir -p build
-
-.PHONY: clean prove
+.PHONY: clean prove lemon
