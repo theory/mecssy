@@ -37,11 +37,9 @@ src/scan.h: src/scan.l
 build/lemon: lemon/lemon.c
 	$(CC)) $(CFLAGS) -o build/lemon lemon/lemon.c
 
-.PHONY: clean
 clean:
 	rm -rf build
 
-.PHOHY: prove
 prove: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
 
@@ -52,3 +50,5 @@ vendor/libtap/src/tap.o: vendor/libtap/src/tap.h
 
 builddir:
 	mkdir -p build
+
+.PHONY: clean prove
