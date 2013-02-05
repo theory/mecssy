@@ -1,10 +1,6 @@
 /build
 /src/scan.c
 /src/scan.h
-/src/scan.o
 /src/parse.c
 /src/parse.h
-/src/parse.o
-
-
-
+/src/parse.out

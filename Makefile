@@ -3,6 +3,7 @@ CFLAGS := $(CFLAGS) -std=c99
 SOURCE_DIR = src
 BUILD_DIR  = build
 TAP_DIR    = vendor/libtap
+LEMON_DIR  = lemon
 
 # Test stuff. http://stackoverflow.com/a/2706067/79202
 TEST_SOURCE_DIR = test
@@ -26,8 +27,8 @@ src/main.o: src/main.c src/parse.h src/scan.h
 
 src/parse.o: src/parse.h src/parse.c
 
-src/parse.h src/parse.c: src/parse.y lemon/lemon
-	./lemon/lemon src/parse.y
+src/parse.h src/parse.c: src/parse.y $(BUILD_DIR)/lemon
+	$(BUILD_DIR)/lemon -T$(LEMON_DIR)/lempar.c src/parse.y
 
 src/scan.o: src/scan.h
 
@@ -39,10 +40,8 @@ src/scan.h: src/scan.l
 # http://stackoverflow.com/a/5395195/79202
 %.c: %.y
 
-lemon: $(BUILD_DIR) $(BUILD_DIR)/lemon
-
-$(BUILD_DIR)/lemon: lemon/lemon.c
-	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lemon lemon/lemon.c
+$(BUILD_DIR)/lemon: $(LEMON_DIR)/lemon.c
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lemon $(LEMON_DIR)/lemon.c
 
 clean:
 	rm -rf $(BUILD_DIR) $(TAP_DIR)/src/tap.o
@@ -55,4 +54,4 @@ $(TEST_BUILD_DIR)/%: $(TEST_SOURCES) $(TAP_DIR)/src/tap.o
 
 $(TAP_DIR)/src/tap.o: $(TAP_DIR)/src/tap.h
 
-.PHONY: clean prove lemon
+.PHONY: clean prove
