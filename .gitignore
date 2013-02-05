@@ -4,3 +4,4 @@
 /src/parse.c
 /src/parse.h
 /src/parse.out
+*.o

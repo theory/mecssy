@@ -55,7 +55,6 @@ declaration ::= property COLON expr prio.
 prio ::= IMPORTANT_SYM.
 
 property ::= IDENT.
-property ::= IDENT S.
 
 expr ::= term.
 expr ::= term rtermlist.
