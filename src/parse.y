@@ -38,6 +38,18 @@ simple_selector ::= selector_symlist.
 
 selector_symbol ::= HASH.
 selector_symbol ::= class.
+selector_symbol ::= attrib.
+
+// http://www.w3schools.com/css/css_attribute_selectors.asp
+attrib ::= LBRACKET IDENT RBRACKET.
+attrib ::= LBRACKET IDENT attrop attrval RBRACKET.
+
+attrop ::= EQUALS.
+attrop ::= INCLUDES.
+attrop ::= DASHMATCH.
+
+attrval ::= IDENT.
+attrval ::= STRING.
 
 selector_symlist ::= selector_symbol.
 selector_symlist ::= selector_symbol selector_symlist.

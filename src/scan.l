@@ -66,8 +66,10 @@ Z               z|\\0{0,4}(5a|7a)(\r\n|[ \t\r\n\f])?|\\z
     /* XXX Add later? */
     /* "<!--"                  {return CDO;}       */
     /* "-->"                   {return CDC;}       */
-    /* "~="                    {return INCLUDES;}  */
-    /* "|="                    {return DASHMATCH;} */
+
+"~="                    {return INCLUDES;}
+"|="                    {return DASHMATCH;}
+"="                     {return EQUALS;}
 
 {string}                {return STRING;}
 {badstring}             {return BAD_STRING;}
