@@ -25,6 +25,7 @@ baduri3         url\({w}{badstring}
 comment         \/\*[^*]*\*+([^/*][^*]*\*+)*\/
 ident           -?{nmstart}{nmchar}*
 name            {nmchar}+
+hexcolor        [0-9a-fA-F]{3}|[0-9a-fA-F]{6}
 num             [0-9]+|[0-9]*"."[0-9]+
 string          {string1}|{string2}
 badstring       {badstring1}|{badstring2}
@@ -72,7 +73,7 @@ Z               z|\\0{0,4}(5a|7a)(\r\n|[ \t\r\n\f])?|\\z
 
 {ident}                 {return IDENT;}
 
-"#"{name}               {return HASH;}
+"#"{hexcolor}           {return HASH;}
 
 @{I}{M}{P}{O}{R}{T}     {return IMPORT_SYM;}
 @{P}{A}{G}{E}           {return PAGE_SYM;}
