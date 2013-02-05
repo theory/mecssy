@@ -46,7 +46,7 @@ $(BUILD_DIR)/lemon: lemon/lemon.c
 clean:
 	rm -rf $(BUILD_DIR)
 
-prove: $(TEST_BUILD_DIR) $(TESTS)
+check: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
 
 $(TEST_BUILD_DIR)/%: $(TEST_SOURCES) $(TAP_DIR)/src/tap.o
