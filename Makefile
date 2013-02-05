@@ -23,11 +23,11 @@ all: $(BUILD_DIR)
 lecsster: $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lecsster $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
 
-$(SOURCE_DIR)/main.o: $(SOURCE_DIR)/main.c
+$(SOURCE_DIR)/main.o: $(SOURCE_DIR)/main.c $(SOURCE_DIR)/parse.h  $(SOURCE_DIR)/scan.h
 
 $(SOURCE_DIR)/parse.o: $(SOURCE_DIR)/parse.c
 
-$(SOURCE_DIR)/scan.o: $(SOURCE_DIR)/scan.c $(SOURCE_DIR)/parse.o
+$(SOURCE_DIR)/scan.o: $(SOURCE_DIR)/scan.c $(SOURCE_DIR)/parse.h $(SOURCE_DIR)/parse.o
 
 $(SOURCE_DIR)/parse.h $(SOURCE_DIR)/parse.c: $(SOURCE_DIR)/parse.y $(BUILD_DIR)/lemon
 	$(BUILD_DIR)/lemon -T$(LEMON_DIR)/lempar.c $(SOURCE_DIR)/parse.y
@@ -46,6 +46,11 @@ $(BUILD_DIR)/lemon: $(BUILD_DIR) $(LEMON_DIR)/lemon.c
 clean:
 	rm -rf $(BUILD_DIR) $(TAP_DIR)/src/tap.o
 	rm $(SOURCE_DIR)/*.o
+	rm $(SOURCE_DIR)/scan.c
+	rm $(SOURCE_DIR)/scan.h
+	rm $(SOURCE_DIR)/parse.c
+	rm $(SOURCE_DIR)/parse.h
+	rm $(SOURCE_DIR)/parse.out
 
 check: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
