@@ -2,12 +2,14 @@ CFLAGS := $(CFLAGS) -std=c99
 
 SOURCE_DIR = src
 BUILD_DIR  = build
+TAP_DIR    = vendor/libtap
 
 # Test stuff. http://stackoverflow.com/a/2706067/79202
 TEST_SOURCE_DIR = test
 TEST_BUILD_DIR  = $(BUILD_DIR)/$(TEST_SOURCE_DIR)
 TEST_SOURCES    = $(wildcard $(TEST_SOURCE_DIR)/*.c)
 TESTS           = $(TEST_SOURCES:$(TEST_SOURCE_DIR)/%.c=$(TEST_BUILD_DIR)/%)
+test_CFLAGS 	= -g -I$(TAP_DIR)/src
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -47,9 +49,9 @@ clean:
 prove: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
 
-$(TEST_BUILD_DIR)/%: $(TEST_SOURCES)
-	$(CC) $(CFLAGS) -o $@ $<
+$(TEST_BUILD_DIR)/%: $(TEST_SOURCES) $(TAP_DIR)/src/tap.o
+	$(CC) $(CFLAGS) $(test_CFLAGS) -o $@ $(TAP_DIR)/src/tap.o $<
 
-vendor/libtap/src/tap.o: vendor/libtap/src/tap.h
+$(TAP_DIR)/src/tap.o: $(TAP_DIR)/src/tap.h
 
 .PHONY: clean prove lemon
