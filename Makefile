@@ -40,7 +40,7 @@ src/scan.h: src/scan.l
 # http://stackoverflow.com/a/5395195/79202
 %.c: %.y
 
-$(BUILD_DIR)/lemon: $(LEMON_DIR)/lemon.c
+$(BUILD_DIR)/lemon: $(BUILD_DIR) $(LEMON_DIR)/lemon.c
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lemon $(LEMON_DIR)/lemon.c
 
 clean:
