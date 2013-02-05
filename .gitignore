@@ -1,3 +1,7 @@
 /build
+/src/scan.c
+/src/scan.h
+/src/scan.o
+
 
 

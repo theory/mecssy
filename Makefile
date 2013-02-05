@@ -10,6 +10,7 @@ TEST_BUILD_DIR  = $(BUILD_DIR)/$(TEST_SOURCE_DIR)
 TEST_SOURCES    = $(wildcard $(TEST_SOURCE_DIR)/*.c)
 TESTS           = $(TEST_SOURCES:$(TEST_SOURCE_DIR)/%.c=$(TEST_BUILD_DIR)/%)
 test_CFLAGS 	= -g -I$(TAP_DIR)/src
+LANG			= C
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -32,6 +33,7 @@ src/parse.h src/parse.c: src/parse.y lemon/lemon
 src/scan.o: src/scan.h
 
 src/scan.h: src/scan.l
+	@LANG=C
 	flex --outfile=src/scan.c --header-file=src/scan.h src/scan.l
 
 # Prevent yacc from trying to build parsers.
