@@ -19,7 +19,7 @@ badstring1      \"([^\n\r\f\\"]|\\{nl}|{escape})*\\?
 badstring2      \'([^\n\r\f\\']|\\{nl}|{escape})*\\?
 badcomment1     \/\*[^*]*\*+([^/*][^*]*\*+)*
 badcomment2     \/\*[^*]*(\*+[^/*][^*]*)*
-baduri1         url\({w}([!#$%&amp;*-@A-Z\[\]-`a-z{-~]|{nonascii}|{escape})*{w}
+baduri1         url\({w}([!#$%&*-@A-Z\[\]-`a-z{-~]|{nonascii}|{escape})*{w}
 baduri2         url\({w}{string}{w}
 baduri3         url\({w}{badstring}
 comment         \/\*[^*]*\*+([^/*][^*]*\*+)*\/
@@ -30,7 +30,7 @@ string          {string1}|{string2}
 badstring       {badstring1}|{badstring2}
 badcomment      {badcomment1}|{badcomment2}
 baduri          {baduri1}|{baduri2}|{baduri3}
-url             ([!#$%&amp;*-~]|{nonascii}|{escape})*
+url             ([!#$%&*-~]|{nonascii}|{escape})*
 s               [ \t\r\n\f]+
 w               {s}?
 nl              \n|\r\n|\r|\f
@@ -62,8 +62,8 @@ Z               z|\\0{0,4}(5a|7a)(\r\n|[ \t\r\n\f])?|\\z
 \/\*[^*]*\*+([^/*][^*]*\*+)*\/      /* ignore comments */
 {badcomment}                        /* unclosed comment at EOF */
 
-"&lt;!--"               {return CDO;}
-"--&gt;"                {return CDC;}
+"<!--"                  {return CDO;}
+"-->"                   {return CDC;}
 "~="                    {return INCLUDES;}
 "|="                    {return DASHMATCH;}
 
