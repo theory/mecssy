@@ -17,7 +17,10 @@
 }
 
 start ::= css.
+css ::= charset ruleset.
 css ::= ruleset.
+
+charset ::= CHARSET_SYM STRING SEMI.
 
 ruleset ::= rule.
 ruleset ::= rule ruleset.
@@ -82,6 +85,7 @@ measure ::= EXS.
 measure ::= ANGLE.
 measure ::= TIME.
 measure ::= FREQ.
+measure ::= DIMENSION.
 
 unary_operator ::= PLUS.
 unary_operator ::= MINUS.

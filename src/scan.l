@@ -1,5 +1,7 @@
 %{
     #include "parse.h"
+    #define BAD_STRING -1
+    #define BAD_URI    -2
 %}
 
 %option reentrant
@@ -25,7 +27,6 @@ baduri3         url\({w}{badstring}
 comment         \/\*[^*]*\*+([^/*][^*]*\*+)*\/
 ident           -?{nmstart}{nmchar}*
 name            {nmchar}+
-hexcolor        [0-9a-fA-F]{3}|[0-9a-fA-F]{6}
 num             [0-9]+|[0-9]*"."[0-9]+
 string          {string1}|{string2}
 badstring       {badstring1}|{badstring2}
@@ -58,26 +59,28 @@ Z               z|\\0{0,4}(5a|7a)(\r\n|[ \t\r\n\f])?|\\z
 
 %%
 
-{s}         {return S;}
-
+{s}                                 /* ignore whitespace */
 \/\*[^*]*\*+([^/*][^*]*\*+)*\/      /* ignore comments */
 {badcomment}                        /* unclosed comment at EOF */
 
-"<!--"                  {return CDO;}
-"-->"                   {return CDC;}
-"~="                    {return INCLUDES;}
-"|="                    {return DASHMATCH;}
+    /* XXX Add later? */
+    /* "<!--"                  {return CDO;}       */
+    /* "-->"                   {return CDC;}       */
+    /* "~="                    {return INCLUDES;}  */
+    /* "|="                    {return DASHMATCH;} */
 
 {string}                {return STRING;}
 {badstring}             {return BAD_STRING;}
 
 {ident}                 {return IDENT;}
 
-"#"{hexcolor}           {return HASH;}
+"#"{name}           {return HASH;}
 
-@{I}{M}{P}{O}{R}{T}     {return IMPORT_SYM;}
-@{P}{A}{G}{E}           {return PAGE_SYM;}
-@{M}{E}{D}{I}{A}        {return MEDIA_SYM;}
+    /* XXX Add later? */
+    /* @{I}{M}{P}{O}{R}{T}     {return IMPORT_SYM;} */
+    /* @{P}{A}{G}{E}           {return PAGE_SYM;}   */
+    /* @{M}{E}{D}{I}{A}        {return MEDIA_SYM;}  */
+
 "@charset "             {return CHARSET_SYM;}
 
 "!"({w}|{comment})*{I}{M}{P}{O}{R}{T}{A}{N}{T}  {return IMPORTANT_SYM;}
@@ -106,7 +109,8 @@ Z               z|\\0{0,4}(5a|7a)(\r\n|[ \t\r\n\f])?|\\z
 "url("{w}{url}{w}")"    {return URI;}
 {baduri}                {return BAD_URI;}
 
-{ident}"("              {return FUNCTION;}
+    /* XXX Add later? */
+    /* {ident}"("              {return FUNCTION;} */
 
 .                       {return *yytext;}
 

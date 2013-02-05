@@ -27,7 +27,7 @@ $(SOURCE_DIR)/main.o: $(SOURCE_DIR)/main.c
 
 $(SOURCE_DIR)/parse.o: $(SOURCE_DIR)/parse.c
 
-$(SOURCE_DIR)/scan.o: $(SOURCE_DIR)/scan.c
+$(SOURCE_DIR)/scan.o: $(SOURCE_DIR)/scan.c $(SOURCE_DIR)/parse.o
 
 $(SOURCE_DIR)/parse.h $(SOURCE_DIR)/parse.c: $(SOURCE_DIR)/parse.y $(BUILD_DIR)/lemon
 	$(BUILD_DIR)/lemon -T$(LEMON_DIR)/lempar.c $(SOURCE_DIR)/parse.y
