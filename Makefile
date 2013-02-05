@@ -45,12 +45,12 @@ $(BUILD_DIR)/lemon: $(BUILD_DIR) $(LEMON_DIR)/lemon.c
 
 clean:
 	rm -rf $(BUILD_DIR) $(TAP_DIR)/src/tap.o
-	rm $(SOURCE_DIR)/*.o
-	rm $(SOURCE_DIR)/scan.c
-	rm $(SOURCE_DIR)/scan.h
-	rm $(SOURCE_DIR)/parse.c
-	rm $(SOURCE_DIR)/parse.h
-	rm $(SOURCE_DIR)/parse.out
+	rm -f $(SOURCE_DIR)/*.o
+	rm -f $(SOURCE_DIR)/scan.c
+	rm -f $(SOURCE_DIR)/scan.h
+	rm -f $(SOURCE_DIR)/parse.c
+	rm -f $(SOURCE_DIR)/parse.h
+	rm -f $(SOURCE_DIR)/parse.out
 
 check: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
