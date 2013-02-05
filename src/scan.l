@@ -112,6 +112,7 @@ Z               z|\\0{0,4}(5a|7a)(\r\n|[ \t\r\n\f])?|\\z
     /* XXX Add later? */
     /* {ident}"("              {return FUNCTION;} */
 
+";"                     {return SEMI;}
 .                       {return *yytext;}
 
 %%
