@@ -60,24 +60,24 @@ Z               z|\\0{0,4}(5a|7a)(\r\n|[ \t\r\n\f])?|\\z
 {s}         {return S;}
 
 \/\*[^*]*\*+([^/*][^*]*\*+)*\/      /* ignore comments */
-{badcomment}                         /* unclosed comment at EOF */
+{badcomment}                        /* unclosed comment at EOF */
 
-"&lt;!--"       {return CDO;}
-"--&gt;"            {return CDC;}
-"~="            {return INCLUDES;}
-"|="            {return DASHMATCH;}
+"&lt;!--"               {return CDO;}
+"--&gt;"                {return CDC;}
+"~="                    {return INCLUDES;}
+"|="                    {return DASHMATCH;}
 
-{string}        {return STRING;}
+{string}                {return STRING;}
 {badstring}             {return BAD_STRING;}
 
-{ident}         {return IDENT;}
+{ident}                 {return IDENT;}
 
-"#"{name}       {return HASH;}
+"#"{name}               {return HASH;}
 
-@{I}{M}{P}{O}{R}{T} {return IMPORT_SYM;}
-@{P}{A}{G}{E}       {return PAGE_SYM;}
-@{M}{E}{D}{I}{A}    {return MEDIA_SYM;}
-"@charset "     {return CHARSET_SYM;}
+@{I}{M}{P}{O}{R}{T}     {return IMPORT_SYM;}
+@{P}{A}{G}{E}           {return PAGE_SYM;}
+@{M}{E}{D}{I}{A}        {return MEDIA_SYM;}
+"@charset "             {return CHARSET_SYM;}
 
 "!"({w}|{comment})*{I}{M}{P}{O}{R}{T}{A}{N}{T}  {return IMPORTANT_SYM;}
 
