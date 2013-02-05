@@ -44,13 +44,13 @@ $(BUILD_DIR)/lemon: $(BUILD_DIR) $(LEMON_DIR)/lemon.c
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lemon $(LEMON_DIR)/lemon.c
 
 clean:
-	rm -rf $(BUILD_DIR) $(TAP_DIR)/src/tap.o
-	rm -f $(SOURCE_DIR)/*.o
-	rm -f $(SOURCE_DIR)/scan.c
-	rm -f $(SOURCE_DIR)/scan.h
-	rm -f $(SOURCE_DIR)/parse.c
-	rm -f $(SOURCE_DIR)/parse.h
-	rm -f $(SOURCE_DIR)/parse.out
+	$(RM) -rf $(BUILD_DIR) $(TAP_DIR)/src/tap.o
+	$(RM) -f $(SOURCE_DIR)/*.o
+	$(RM) -f $(SOURCE_DIR)/scan.c
+	$(RM) -f $(SOURCE_DIR)/scan.h
+	$(RM) -f $(SOURCE_DIR)/parse.c
+	$(RM) -f $(SOURCE_DIR)/parse.h
+	$(RM) -f $(SOURCE_DIR)/parse.out
 
 check: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
