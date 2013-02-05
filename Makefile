@@ -44,7 +44,7 @@ $(BUILD_DIR)/lemon: lemon/lemon.c
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lemon lemon/lemon.c
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) $(TAP_DIR)/src/tap.o
 
 check: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
