@@ -1,5 +1,5 @@
-Lecsster CSS Parser
-===================
+Mecssy CSS Parser
+=================
 
 An experiment.
 

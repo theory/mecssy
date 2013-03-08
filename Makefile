@@ -20,12 +20,12 @@ $(TEST_BUILD_DIR):
 
 all: $(BUILD_DIR)
 
-lecsster: $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
-	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lecsster $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
+mecssy: $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/mecssy $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
 
 $(SOURCE_DIR)/main.o: $(SOURCE_DIR)/main.c $(SOURCE_DIR)/parse.h  $(SOURCE_DIR)/scan.h
 
-$(SOURCE_DIR)/lecsster.o: $(SOURCE_DIR)/lecsster.c $(SOURCE_DIR)/parse.h  $(SOURCE_DIR)/scan.h
+$(SOURCE_DIR)/mecssy.o: $(SOURCE_DIR)/mecssy.c $(SOURCE_DIR)/parse.h  $(SOURCE_DIR)/scan.h
 
 $(SOURCE_DIR)/parse.o: $(SOURCE_DIR)/parse.c
 
@@ -60,8 +60,8 @@ check: $(TEST_BUILD_DIR) $(TESTS)
 checkv: $(TEST_BUILD_DIR) $(TESTS)
 	prove -v $(TESTS)
 
-$(TEST_BUILD_DIR)/%: $(TEST_SOURCE_DIR)/%.c $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
-	$(CC) $(CFLAGS) $(test_CFLAGS) -o $@ $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o $<
+$(TEST_BUILD_DIR)/%: $(TEST_SOURCE_DIR)/%.c $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/mecssy.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
+	$(CC) $(CFLAGS) $(test_CFLAGS) -o $@ $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/mecssy.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o $<
 
 $(TAP_DIR)/src/tap.o: $(TAP_DIR)/src/tap.h
 

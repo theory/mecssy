@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "tap.h"
-#include "lecsster.h"
+#include "mecssy.h"
 
 int main(int argc, char** argv) {
     plan_tests(1);
