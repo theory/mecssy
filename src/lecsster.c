@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#import "scan.h"
-#import "parse.h"
+#include "scan.h"
+#include "parse.h"
 
 void* ParseAlloc(void* (*allocProc)(size_t));
 void* Parse(void*, int, const char*);
@@ -19,8 +19,12 @@ int parse_css(FILE *fh) {
 
     do {
         lexCode = yylex(scanner);
+        printf("Got %i\n", lexCode);
         Parse(css_parser, lexCode, yyget_text(scanner));
     } while (lexCode > 0);
+
+    // Finish the job.
+    Parse(css_parser, 0, NULL);
 
     if (-1 == lexCode) {
         fprintf(stderr, "The scanner encountered an error.\n");
