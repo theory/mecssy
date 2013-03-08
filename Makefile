@@ -57,8 +57,8 @@ clean:
 check: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
 
-$(TEST_BUILD_DIR)/%: $(TEST_SOURCE_DIR)/%.c $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o
-	$(CC) $(CFLAGS) $(test_CFLAGS) -o $@ $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o $<
+$(TEST_BUILD_DIR)/%: $(TEST_SOURCE_DIR)/%.c $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
+	$(CC) $(CFLAGS) $(test_CFLAGS) -o $@ $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o $<
 
 $(TAP_DIR)/src/tap.o: $(TAP_DIR)/src/tap.h
 

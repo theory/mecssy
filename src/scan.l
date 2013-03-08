@@ -6,7 +6,6 @@
 
 %option reentrant
 %option noyywrap
-
 %option case-insensitive
 
 h               [0-9a-f]
