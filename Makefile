@@ -1,16 +1,16 @@
-CFLAGS := $(CFLAGS) -std=c99
-
 SOURCE_DIR = src
 BUILD_DIR  = build
 TAP_DIR    = vendor/libtap
 LEMON_DIR  = lemon
+
+CFLAGS := $(CFLAGS) -std=c99 -I$(SOURCE_DIR)
 
 # Test stuff. http://stackoverflow.com/a/2706067/79202
 TEST_SOURCE_DIR = test
 TEST_BUILD_DIR  = $(BUILD_DIR)/$(TEST_SOURCE_DIR)
 TEST_SOURCES    = $(wildcard $(TEST_SOURCE_DIR)/*.c)
 TESTS           = $(TEST_SOURCES:$(TEST_SOURCE_DIR)/%.c=$(TEST_BUILD_DIR)/%)
-test_CFLAGS 	= -g -I$(TAP_DIR)/src
+test_CFLAGS 	= $(CFLAGS) -g -I$(TAP_DIR)/src
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -24,6 +24,8 @@ lecsster: $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/lecsster $(SOURCE_DIR)/main.o $(SOURCE_DIR)/parse.o $(SOURCE_DIR)/scan.o
 
 $(SOURCE_DIR)/main.o: $(SOURCE_DIR)/main.c $(SOURCE_DIR)/parse.h  $(SOURCE_DIR)/scan.h
+
+$(SOURCE_DIR)/lecsster.o: $(SOURCE_DIR)/lecsster.c $(SOURCE_DIR)/parse.h  $(SOURCE_DIR)/scan.h
 
 $(SOURCE_DIR)/parse.o: $(SOURCE_DIR)/parse.c
 
