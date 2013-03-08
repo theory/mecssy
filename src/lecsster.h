@@ -1,3 +1,3 @@
 
-void parse_css(FILE);
+int parse_css(FILE *fh);
 

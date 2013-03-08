@@ -10,7 +10,7 @@ TEST_SOURCE_DIR = test
 TEST_BUILD_DIR  = $(BUILD_DIR)/$(TEST_SOURCE_DIR)
 TEST_SOURCES    = $(wildcard $(TEST_SOURCE_DIR)/*.c)
 TESTS           = $(TEST_SOURCES:$(TEST_SOURCE_DIR)/%.c=$(TEST_BUILD_DIR)/%)
-test_CFLAGS 	= $(CFLAGS) -g -I$(TAP_DIR)/src
+test_CFLAGS 	= -g -I$(TAP_DIR)/src
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -57,8 +57,8 @@ clean:
 check: $(TEST_BUILD_DIR) $(TESTS)
 	prove $(TESTS)
 
-$(TEST_BUILD_DIR)/%: $(TEST_SOURCES) $(TAP_DIR)/src/tap.o
-	$(CC) $(CFLAGS) $(test_CFLAGS) -o $@ $(TAP_DIR)/src/tap.o $<
+$(TEST_BUILD_DIR)/%: $(TEST_SOURCE_DIR)/%.c $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o
+	$(CC) $(CFLAGS) $(test_CFLAGS) -o $@ $(TAP_DIR)/src/tap.o $(SOURCE_DIR)/lecsster.o $<
 
 $(TAP_DIR)/src/tap.o: $(TAP_DIR)/src/tap.h
 

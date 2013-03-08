@@ -1,7 +1,7 @@
 #import "scan.h"
 #import "parse.h"
 
-void parse_css(FILE) {
+int parse_css(FILE *fh) {
     // What??
 }
 
